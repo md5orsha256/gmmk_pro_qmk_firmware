@@ -19,4 +19,4 @@ jobs:
 
       - name: Build c lang firmware
         run: |
-          whith qmk ; whith json2c
+          which qmk ; which json2c
