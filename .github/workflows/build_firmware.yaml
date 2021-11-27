@@ -1,0 +1,22 @@
+name: Build QMK Firmware for my GMMK Pro with fix rotary knob
+on: [push]
+jobs:
+  build-malware:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Install python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - name: Install and configure qmk
+        run: |
+          python3 -m pip install qmk
+          export QMK_HOME='~/qmk_firmware'
+          qmk setup
+          ls -a
+
+      - name: Build c lang firmware
+        run: |
+          whith qmk ; whith json2c
