@@ -19,4 +19,5 @@ jobs:
 
       - name: Build c lang firmware
         run: |
-          qmk
+          qmk json2c -o dc5f48d9-d7f9-4143-8a2b-86b0a3c620ff-keymap.c gmmk_pro_ansi_layout_mine.json
+          ls -lah
