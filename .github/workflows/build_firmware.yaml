@@ -41,5 +41,3 @@ jobs:
         with:
           name: gmmk_pro_firmware_with_rotary_knob_fix
           path: $QMK_HOME/gmmk_pro_ansi_fix_rotary_knob.bin
-        run: |
-          ls -lah $QMK_HOME/gmmk_pro_ansi_fix_rotary_knob.bin
