@@ -17,14 +17,15 @@ jobs:
           qmk setup --yes
           ls -a
 
-      - name: Build c lang firmware
+      - name: Build firmware
         run: |
           qmk json2c -o keymap.c gmmk_pro_ansi_layout_mine.json
           ls -lah
           echo -e "\n"  >> keymap.c
           echo -e "bool encoder_update_user(uint8_t index, bool clockwise) {\n    if (clockwise) {\n      tap_code(KC_VOLU);\n    } else {\n      tap_code(KC_VOLD);\n    }\n    return true;\n}" >> keymap.c
           qmk new-keymap -kb gmmk/pro/ansi -km fix_rotary_knob
-          rm $(QMK_HOME)/keyboards/gmmk/pro/ansi/keymaps/fix_rotary_knob/keymap.c
-          cp keymap.c $(QMK_HOME)/keyboards/gmmk/pro/ansi/keymaps/fix_rotary_knob/
+          rm $QMK_HOME/keyboards/gmmk/pro/ansi/keymaps/fix_rotary_knob/keymap.c
+          cp keymap.c $QMK_HOME/keyboards/gmmk/pro/ansi/keymaps/fix_rotary_knob/
           qmk compile -kb gmmk/pro/ansi -km fix_rotary_knob
-          ls -a
+          ls -lha
+          ls -lah $QMK_HOME/keyboards/gmmk/pro/ansi/keymaps/fix_rotary_knob/
