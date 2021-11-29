@@ -3,6 +3,9 @@ on: [push]
 jobs:
   build-malware:
     runs-on: ubuntu-latest
+    env:
+      FIRMWARE_KEYMAP_NAME: fix_rotary_knob
+      QMK_HOME: ~/qmk_firmware
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
@@ -13,7 +16,6 @@ jobs:
       - name: Install and configure qmk
         run: |
           python3 -m pip install qmk
-          export QMK_HOME='~/qmk_firmware'
           qmk setup --yes
           ls -a
 
@@ -23,9 +25,9 @@ jobs:
           ls -lah
           echo -e "\n"  >> keymap.c
           echo -e "bool encoder_update_user(uint8_t index, bool clockwise) {\n    if (clockwise) {\n      tap_code(KC_VOLU);\n    } else {\n      tap_code(KC_VOLD);\n    }\n    return true;\n}" >> keymap.c
-          qmk new-keymap -kb gmmk/pro/ansi -km fix_rotary_knob
-          rm $QMK_HOME/keyboards/gmmk/pro/ansi/keymaps/fix_rotary_knob/keymap.c
-          cp keymap.c $QMK_HOME/keyboards/gmmk/pro/ansi/keymaps/fix_rotary_knob/
-          qmk compile -kb gmmk/pro/ansi -km fix_rotary_knob
+          qmk new-keymap -kb gmmk/pro/ansi -km $FIRMWARE_KEYMAP_NAME
+          rm $QMK_HOME/keyboards/gmmk/pro/ansi/keymaps/$FIRMWARE_KEYMAP_NAME/keymap.c
+          cp keymap.c $QMK_HOME/keyboards/gmmk/pro/ansi/keymaps/$FIRMWARE_KEYMAP_NAME/
+          qmk compile -kb gmmk/pro/ansi -km $FIRMWARE_KEYMAP_NAME
           ls -lha
-          ls -lah $QMK_HOME/keyboards/gmmk/pro/ansi/keymaps/fix_rotary_knob/
+          ls -lah $QMK_HOME/keyboards/gmmk/pro/ansi/keymaps/$FIRMWARE_KEYMAP_NAME/
