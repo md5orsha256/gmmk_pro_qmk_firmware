@@ -40,4 +40,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: gmmk_pro_firmware_with_rotary_knob_fix
-          path: $QMK_HOME/gmmk_pro_ansi_fix_rotary_knob.bin
+          path: ${{ env.QMK_HOME }}/gmmk_pro_ansi_fix_rotary_knob.bin
