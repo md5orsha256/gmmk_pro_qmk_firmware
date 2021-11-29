@@ -34,5 +34,8 @@ jobs:
 
           qmk compile -kb gmmk/pro/ansi -km $FIRMWARE_KEYMAP_NAME
 
-          ls -lah $QMK_HOME
-          ls -lah $QMK_HOME/.build
+      - name: Attach builded firware as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: gmmk_pro_firmware_with_rotary_knob_fix
+          path: $QMK_HOME/gmmk_pro_ansi_fix_rotary_knob.bin
