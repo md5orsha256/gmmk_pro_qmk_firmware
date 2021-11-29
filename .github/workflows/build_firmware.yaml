@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       FIRMWARE_KEYMAP_NAME: fix_rotary_knob
-      QMK_HOME: ~/qmk_firmware
+      QMK_HOME: /home/runner/qmk_firmware
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
