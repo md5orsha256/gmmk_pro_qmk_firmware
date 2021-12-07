@@ -1,5 +1,7 @@
 name: Build QMK Firmware for my GMMK Pro with fix rotary knob
+
 on: [push]
+
 jobs:
   build-firmware:
     runs-on: ubuntu-latest
