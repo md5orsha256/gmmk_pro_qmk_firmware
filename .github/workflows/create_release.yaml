@@ -21,9 +21,6 @@ jobs:
           commit: ${{ github.event.pull_request.head.sha || github.sha }}
           name: gmmk_pro_firmware_with_rotary_knob_fix
           path: ./
-
-      - name: Display structure of downloaded files
-        run: ls -lah
       
       - name: Release
         uses: softprops/action-gh-release@v1
