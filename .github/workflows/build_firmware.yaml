@@ -40,3 +40,9 @@ jobs:
         with:
           name: gmmk_pro_firmware_with_rotary_knob_fix
           path: ${{ env.QMK_HOME }}/gmmk_pro_ansi_fix_rotary_knob.bin
+      
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: github.ref_type == 'tag'
+        with:
+          files: gmmk_pro_ansi_fix_rotary_knob.bin
