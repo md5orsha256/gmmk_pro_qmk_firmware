@@ -30,13 +30,10 @@ jobs:
           echo -e "bool encoder_update_user(uint8_t index, bool clockwise) {\n    if (clockwise) {\n      tap_code(KC_VOLU);\n    } else {\n      tap_code(KC_VOLD);\n    }\n    return true;\n}" >> keymap.c
 
           qmk new-keymap -kb gmmk/pro/ansi -km $FIRMWARE_KEYMAP_NAME
-
           rm $QMK_HOME/keyboards/gmmk/pro/ansi/keymaps/$FIRMWARE_KEYMAP_NAME/keymap.c
           cp keymap.c $QMK_HOME/keyboards/gmmk/pro/ansi/keymaps/$FIRMWARE_KEYMAP_NAME/
 
           qmk compile -kb gmmk/pro/ansi -km $FIRMWARE_KEYMAP_NAME
-
-          ls -lah $QMK_HOME/gmmk_pro_ansi_fix_rotary_knob.bin
 
       - name: Attach builded firware as artifact
         uses: actions/upload-artifact@v2
