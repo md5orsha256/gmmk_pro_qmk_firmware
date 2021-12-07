@@ -2,6 +2,12 @@
 
 My repository for containing keymap for my GMMK pro keyboard and building in [actions pipelines](https://github.com/md5orsha256/gmmk_pro_qmk_firmware/actions)
 
+## Current Keymap
+### Layout 0
+<img width="839" alt="image" src="https://user-images.githubusercontent.com/17884471/145017257-a8f3665a-4922-46f3-9d94-ff351132804e.png">
+
+### Layout 1
+<img width="844" alt="image" src="https://user-images.githubusercontent.com/17884471/145017403-1b7b7bc7-a66c-4244-ace0-f43267d2edb9.png">
 
 ## Update keymap
 
