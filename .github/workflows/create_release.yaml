@@ -9,7 +9,7 @@ jobs:
   build:
     name: Upload Release Asset
     runs-on: ubuntu-latest
-    if: ${{ startsWith(github.ref, 'v') && github.ref_type == "tag" }}
+    if: ${{ startsWith(github.ref, 'v') && github.ref_type == 'tag' }}
     steps:
 
       - name: Download Artifact from build-firmware job
