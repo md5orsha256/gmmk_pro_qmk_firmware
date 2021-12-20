@@ -10,6 +10,9 @@ on:
     branches:
       - master
       - main
+      - v*
+      - v*.*
+      - v*.*.*
 
 jobs:
   build-firmware:
