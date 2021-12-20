@@ -4,7 +4,7 @@ My repository for containing keymap for my GMMK pro keyboard and building in [ac
 
 ## Current Keymap
 ### Layout 0
-<img width="839" alt="image" src="https://user-images.githubusercontent.com/17884471/145017257-a8f3665a-4922-46f3-9d94-ff351132804e.png">
+<img width="844" alt="image" src="https://user-images.githubusercontent.com/17884471/146726683-95612763-bf9f-48ac-aa3a-13000b9a0516.png">
 
 ### Layout 1
 <img width="844" alt="image" src="https://user-images.githubusercontent.com/17884471/145017403-1b7b7bc7-a66c-4244-ace0-f43267d2edb9.png">
