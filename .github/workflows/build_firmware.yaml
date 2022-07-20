@@ -44,6 +44,9 @@ jobs:
           qmk new-keymap -kb gmmk/pro/ansi -km $FIRMWARE_KEYMAP_NAME
           rm $QMK_HOME/keyboards/gmmk/pro/ansi/keymaps/$FIRMWARE_KEYMAP_NAME/keymap.c
           cp keymap.c $QMK_HOME/keyboards/gmmk/pro/ansi/keymaps/$FIRMWARE_KEYMAP_NAME/
+          
+          echo "VIA_ENABLE = yes" >>  $QMK_HOME/keyboards/gmmk/pro/ansi/keymaps/$FIRMWARE_KEYMAP_NAME/rules.mk
+          echo "SLEEP_LED_ENABLE = yes" >>  $QMK_HOME/keyboards/gmmk/pro/ansi/keymaps/$FIRMWARE_KEYMAP_NAME/rules.mk
 
           qmk compile -kb gmmk/pro/ansi -km $FIRMWARE_KEYMAP_NAME
 
