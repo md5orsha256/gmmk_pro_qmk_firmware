@@ -5,18 +5,21 @@ on: [push]
 jobs:
   build-firmware:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     env:
       FIRMWARE_KEYMAP_NAME: fix_rotary_knob
+      QMK_KEYBOARD: gmmk/pro/rev1/ansi
       QMK_HOME: /home/runner/qmk_firmware
     steps:
 
       - name: Check out repository code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      - name: Install python 3.9
-        uses: actions/setup-python@v2
+      - name: Install python 3.12
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.9'
+          python-version: '3.12'
 
       - name: Install and configure qmk
         run: |
@@ -29,20 +32,20 @@ jobs:
           echo -e "\n"  >> keymap.c
           echo -e "bool encoder_update_user(uint8_t index, bool clockwise) {\n    if (clockwise) {\n      tap_code(KC_VOLU);\n    } else {\n      tap_code(KC_VOLD);\n    }\n    return true;\n}" >> keymap.c
 
-          qmk new-keymap -kb gmmk/pro/ansi -km $FIRMWARE_KEYMAP_NAME
-          rm $QMK_HOME/keyboards/gmmk/pro/ansi/keymaps/$FIRMWARE_KEYMAP_NAME/keymap.c
-          cp keymap.c $QMK_HOME/keyboards/gmmk/pro/ansi/keymaps/$FIRMWARE_KEYMAP_NAME/
+          KEYMAP_DIR=$QMK_HOME/keyboards/$QMK_KEYBOARD/keymaps/$FIRMWARE_KEYMAP_NAME
+          mkdir -p $KEYMAP_DIR
+          cp keymap.c $KEYMAP_DIR/
 
-          qmk compile -kb gmmk/pro/ansi -km $FIRMWARE_KEYMAP_NAME
+          qmk compile -kb $QMK_KEYBOARD -km $FIRMWARE_KEYMAP_NAME
 
       - name: Attach builded firware as artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: gmmk_pro_firmware_with_rotary_knob_fix
-          path: ${{ env.QMK_HOME }}/gmmk_pro_ansi_fix_rotary_knob.bin
-      
+          path: ${{ env.QMK_HOME }}/gmmk_pro_rev1_ansi_fix_rotary_knob.bin
+
       - name: Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         if: github.ref_type == 'tag'
         with:
-          files: ${{ env.QMK_HOME }}/gmmk_pro_ansi_fix_rotary_knob.bin
+          files: ${{ env.QMK_HOME }}/gmmk_pro_rev1_ansi_fix_rotary_knob.bin
