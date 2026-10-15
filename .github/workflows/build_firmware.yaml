@@ -41,7 +41,7 @@ jobs:
           }
 
       - name: Attach builded firware as artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: gmmk_pro_firmware_with_rotary_knob_fix
           path: ${{ env.QMK_HOME }}/gmmk_pro_rev1_ansi_fix_rotary_knob.bin
