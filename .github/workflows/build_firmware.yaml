@@ -23,7 +23,9 @@ jobs:
           python3 -m pip install -r $QMK_HOME/requirements.txt || python3 -m pip install --break-system-packages -r $QMK_HOME/requirements.txt
 
       - name: Build firmware
+        shell: bash
         run: |
+          trap 'echo "::error title=Build step failed::$BASH_COMMAND"' ERR
           qmk json2c -o keymap.c gmmk_pro_ansi_layout_mine.json
           echo -e "\n"  >> keymap.c
           echo -e "bool encoder_update_user(uint8_t index, bool clockwise) {\n    if (clockwise) {\n      tap_code(KC_VOLU);\n    } else {\n      tap_code(KC_VOLD);\n    }\n    return true;\n}" >> keymap.c
@@ -32,7 +34,11 @@ jobs:
           mkdir -p $KEYMAP_DIR
           cp keymap.c $KEYMAP_DIR/
 
-          qmk compile -kb $QMK_KEYBOARD -km $FIRMWARE_KEYMAP_NAME
+          set -o pipefail
+          qmk compile -kb $QMK_KEYBOARD -km $FIRMWARE_KEYMAP_NAME 2>&1 | tee build.log || {
+            echo "::error title=QMK build failed::$(grep -iE 'error|warning|not found' build.log | head -20 | sed 's/\x1b\[[0-9;]*m//g' | tr '\n' '|')"
+            exit 1
+          }
 
       - name: Attach builded firware as artifact
         uses: actions/upload-artifact@v4
